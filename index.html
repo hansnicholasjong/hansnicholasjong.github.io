@@ -2,78 +2,75 @@
 <!DOCTYPE html><html><head><meta charset="utf-8">
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 <style>
-body{font-family:Arial,sans-serif;max-width:1400px;margin:auto;padding:15px}
-#stats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:15px}
-.card{background:#f4f4f4;padding:10px;border-radius:8px;text-align:center}
+body{background:#0b0914;color:#eee;font-family:Inter,Arial,sans-serif;margin:0;padding:20px}
+.container{max-width:1400px;margin:auto}
+h1{margin:0;color:#f3c63f;font-size:44px;line-height:1}
+h2{margin:0 0 10px 0;font-size:28px}
+.cards{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:18px 0}
+.card{background:#11101c;border:1px solid #26233a;padding:10px}
+.label{font-size:11px;color:#999;text-transform:uppercase}
+.value{font-size:28px;font-weight:700}
+select{background:#11101c;color:white;padding:8px;border:1px solid #333}
 #chart{height:650px}
-</style></head><body>
-<h2>Egg Prices, Minimum Wages & Egg Buying Power</h2>
+</style></head><body><div class="container">
+<h2>GLOBAL ECONOMICS • 2025–2026</h2>
+<h1>Egg Prices & Minimum Wages</h1>
+<h2>by Country</h2>
 
-<div id="stats">
-<div class="card"><b>Total countries</b><br>79</div>
-<div class="card"><b>Most expensive eggs</b><br>Switzerland ($8.12)</div>
-<div class="card"><b>Cheapest eggs</b><br>Pakistan ($1.40)</div>
-<div class="card"><b>Average egg price</b><br>$3.33</div>
-<div class="card"><b>Average minimum wage</b><br>$975</div>
-<div class="card"><b>Highest wage</b><br>Switzerland ($4675)</div>
+<div class="cards">
+<div class="card"><div class="label">Countries</div><div class="value">79</div></div>
+<div class="card"><div class="label">Avg Egg Price</div><div class="value">$3.33</div></div>
+<div class="card"><div class="label">Most Expensive</div><div class="value">$8.12</div><small>Switzerland</small></div>
+<div class="card"><div class="label">Cheapest</div><div class="value">$1.40</div><small>Pakistan</small></div>
+<div class="card"><div class="label">Avg Min Wage</div><div class="value">$975</div></div>
+<div class="card"><div class="label">Highest Wage</div><div class="value">$4675</div><small>Switzerland</small></div>
 </div>
 
-Sort by:
+<label>Sort by: </label>
 <select id="sort">
-<option value="min_wage">Minimum wage</option>
-<option value="egg_price">Egg price</option>
-<option value="affordable">Egg buying power</option>
+<option value="min_wage">Minimum Wage</option>
+<option value="egg_price">Egg Price</option>
+<option value="affordable">Buying Power</option>
 </select>
 
 <div id="chart"></div>
+</div>
 
 <script>
-const allData=[{"country": "Switzerland", "egg_price": 8.12, "min_wage": 4675, "affordable": 575.7389163, "continent": "Europe"}, {"country": "Norway", "egg_price": 7.18, "min_wage": 1869, "affordable": 260.3064067, "continent": "Europe"}, {"country": "Australia", "egg_price": 7.18, "min_wage": 2691, "affordable": 374.7910864, "continent": "Oceania"}, {"country": "New Zealand", "egg_price": 7.06, "min_wage": 2316, "affordable": 328.0453258, "continent": "Oceania"}, {"country": "Uruguay", "egg_price": 6.25, "min_wage": 605, "affordable": 96.8, "continent": "South America"}, {"country": "Czechia", "egg_price": 5.17, "min_wage": 1094.9, "affordable": 211.7794971, "continent": "Europe"}, {"country": "Sweden", "egg_price": 5.04, "min_wage": 2439, "affordable": 483.9285714, "continent": "Europe"}, {"country": "Belgium", "egg_price": 5.02, "min_wage": 2502.6, "affordable": 498.5258964, "continent": "Europe"}, {"country": "Denmark", "egg_price": 4.91, "min_wage": 2250, "affordable": 458.2484725, "continent": "Europe"}, {"country": "Austria", "egg_price": 4.9, "min_wage": 1651, "affordable": 336.9387755, "continent": "Europe"}, {"country": "UK", "egg_price": 4.87, "min_wage": 2849, "affordable": 585.0102669, "continent": "Europe"}, {"country": "Ireland", "egg_price": 4.78, "min_wage": 2879.5, "affordable": 602.4058577, "continent": "Europe"}, {"country": "Hong Kong", "egg_price": 4.71, "min_wage": 530, "affordable": 112.5265393, "continent": "Asia"}, {"country": "Italy", "egg_price": 4.65, "min_wage": 1470, "affordable": 316.1290323, "continent": "Europe"}, {"country": "Germany", "egg_price": 4.62, "min_wage": 2829.4, "affordable": 612.4242424, "continent": "Europe"}, {"country": "USA", "egg_price": 4.62, "min_wage": 1256.2, "affordable": 271.9047619, "continent": "North America"}, {"country": "Greece", "egg_price": 4.57, "min_wage": 1216.9, "affordable": 266.2800875, "continent": "Europe"}, {"country": "Israel", "egg_price": 4.47, "min_wage": 1680.2, "affordable": 375.8836689, "continent": "Asia"}, {"country": "Ghana", "egg_price": 4.46, "min_wage": 32, "affordable": 7.174887892, "continent": "Africa"}, {"country": "France", "egg_price": 4.27, "min_wage": 2160.1, "affordable": 505.8782201, "continent": "Europe"}, {"country": "Slovakia", "egg_price": 4.2, "min_wage": 1084.2, "affordable": 258.1428571, "continent": "Europe"}, {"country": "Lithuania", "egg_price": 4.2, "min_wage": 1366.2, "affordable": 325.2857143, "continent": "Europe"}, {"country": "Latvia", "egg_price": 4.06, "min_wage": 924.3, "affordable": 227.6600985, "continent": "Europe"}, {"country": "Romania", "egg_price": 4.04, "min_wage": 942, "affordable": 233.1683168, "continent": "Europe"}, {"country": "Poland", "egg_price": 3.96, "min_wage": 1349.6, "affordable": 340.8080808, "continent": "Europe"}, {"country": "Chile", "egg_price": 3.96, "min_wage": 555.5, "affordable": 140.2777778, "continent": "South America"}, {"country": "Finland", "egg_price": 3.82, "min_wage": 1613, "affordable": 422.2513089, "continent": "Europe"}, {"country": "Spain", "egg_price": 3.8, "min_wage": 1636.4, "affordable": 430.6315789, "continent": "Europe"}, {"country": "Hungary", "egg_price": 3.8, "min_wage": 993, "affordable": 261.3157895, "continent": "Europe"}, {"country": "Portugal", "egg_price": 3.61, "min_wage": 1271.4, "affordable": 352.1883657, "continent": "Europe"}, {"country": "Puerto Rico", "egg_price": 3.58, "min_wage": 1680, "affordable": 469.273743, "continent": "North America"}, {"country": "Morocco", "egg_price": 3.51, "min_wage": 332.5, "affordable": 94.72934473, "continent": "Africa"}, {"country": "Netherlands", "egg_price": 3.45, "min_wage": 2249, "affordable": 651.884058, "continent": "Europe"}, {"country": "Croatia", "egg_price": 3.44, "min_wage": 1244.2, "affordable": 361.6860465, "continent": "Europe"}, {"country": "South Africa", "egg_price": 3.2, "min_wage": 268.8, "affordable": 84, "continent": "Africa"}, {"country": "Mexico", "egg_price": 3.16, "min_wage": 330, "affordable": 104.4303797, "continent": "North America"}, {"country": "South Korea", "egg_price": 3.04, "min_wage": 1182, "affordable": 388.8157895, "continent": "Asia"}, {"country": "Japan", "egg_price": 2.96, "min_wage": 1244.7, "affordable": 420.5067568, "continent": "Asia"}, {"country": "Slovenia", "egg_price": 2.93, "min_wage": 1514.3, "affordable": 516.8259386, "continent": "Europe"}, {"country": "Canada", "egg_price": 2.89, "min_wage": 2191.6, "affordable": 758.3391003, "continent": "North America"}, {"country": "Colombia", "egg_price": 2.73, "min_wage": 384.4, "affordable": 140.8058608, "continent": "South America"}, {"country": "UA Emirates", "egg_price": 2.72, "min_wage": 1634, "affordable": 600.7352941, "continent": "Asia"}, {"country": "Ivory Coast", "egg_price": 2.71, "min_wage": 124.2, "affordable": 45.8302583, "continent": "Africa"}, {"country": "Singapore", "egg_price": 2.68, "min_wage": 1415, "affordable": 527.9850746, "continent": "Asia"}, {"country": "Nigeria", "egg_price": 2.66, "min_wage": 45.5, "affordable": 17.10526316, "continent": "Africa"}, {"country": "Malaysia", "egg_price": 2.6, "min_wage": 430.5, "affordable": 165.5769231, "continent": "Asia"}, {"country": "Serbia", "egg_price": 2.57, "min_wage": 881.6, "affordable": 343.0350195, "continent": "Europe"}, {"country": "Thailand", "egg_price": 2.54, "min_wage": 252.6, "affordable": 99.4488189, "continent": "Asia"}, {"country": "Jordan", "egg_price": 2.54, "min_wage": 409, "affordable": 161.023622, "continent": "Asia"}, {"country": "Peru", "egg_price": 2.49, "min_wage": 331.8, "affordable": 133.253012, "continent": "South America"}, {"country": "Turkey", "egg_price": 2.47, "min_wage": 759.4, "affordable": 307.4493927, "continent": "Asia"}, {"country": "Brazil", "egg_price": 2.42, "min_wage": 303.8, "affordable": 125.5371901, "continent": "South America"}, {"country": "Tanzania", "egg_price": 2.37, "min_wage": 32, "affordable": 13.5021097, "continent": "Africa"}, {"country": "Saudi Arabia", "egg_price": 2.34, "min_wage": 1067, "affordable": 455.982906, "continent": "Asia"}, {"country": "Ecuador", "egg_price": 2.33, "min_wage": 482, "affordable": 206.8669528, "continent": "South America"}, {"country": "Cameroon", "egg_price": 2.32, "min_wage": 60.1, "affordable": 25.90517241, "continent": "Africa"}, {"country": "China", "egg_price": 2.28, "min_wage": 391.7, "affordable": 171.7982456, "continent": "Asia"}, {"country": "Philippines", "egg_price": 2.23, "min_wage": 254.6, "affordable": 114.1704036, "continent": "Asia"}, {"country": "Russia", "egg_price": 2.21, "min_wage": 242.5, "affordable": 109.7285068, "continent": "Europe"}, {"country": "Kuwait", "egg_price": 2.21, "min_wage": 195.4, "affordable": 88.41628959, "continent": "Asia"}, {"country": "Ukraine", "egg_price": 2.1, "min_wage": 202.9, "affordable": 96.61904762, "continent": "Europe"}, {"country": "Vietnam", "egg_price": 2.1, "min_wage": 212.4, "affordable": 101.1428571, "continent": "Asia"}, {"country": "Paraguay", "egg_price": 2.09, "min_wage": 405.9, "affordable": 194.2105263, "continent": "South America"}, {"country": "Tunisia", "egg_price": 2.01, "min_wage": 149, "affordable": 74.12935323, "continent": "Africa"}, {"country": "Dominican Republic", "egg_price": 2.01, "min_wage": 269.9, "affordable": 134.278607, "continent": "North America"}, {"country": "Costa Rica", "egg_price": 1.94, "min_wage": 726, "affordable": 374.2268041, "continent": "North America"}, {"country": "India", "egg_price": 1.89, "min_wage": 43.2, "affordable": 22.85714286, "continent": "Asia"}, {"country": "Kenya", "egg_price": 1.89, "min_wage": 116.9, "affordable": 61.85185185, "continent": "Africa"}, {"country": "Guatemala", "egg_price": 1.89, "min_wage": 513.1, "affordable": 271.4814815, "continent": "North America"}, {"country": "Uganda", "egg_price": 1.83, "min_wage": 35.1, "affordable": 19.18032787, "continent": "Africa"}, {"country": "Bolivia", "egg_price": 1.81, "min_wage": 469, "affordable": 259.1160221, "continent": "South America"}, {"country": "Kazakhstan", "egg_price": 1.8, "min_wage": 161.5, "affordable": 89.72222222, "continent": "Asia"}, {"country": "Azerbaijan", "egg_price": 1.8, "min_wage": 235.3, "affordable": 130.7222222, "continent": "Asia"}, {"country": "Indonesia", "egg_price": 1.79, "min_wage": 343.8, "affordable": 192.0670391, "continent": "Asia"}, {"country": "Zambia", "egg_price": 1.77, "min_wage": 52.8, "affordable": 29.83050847, "continent": "Africa"}, {"country": "Sri Lanka", "egg_price": 1.69, "min_wage": 56.5, "affordable": 33.43195266, "continent": "Asia"}, {"country": "Egypt", "egg_price": 1.57, "min_wage": 146.7, "affordable": 93.43949045, "continent": "Africa"}, {"country": "Bangladesh", "egg_price": 1.55, "min_wage": 101.5, "affordable": 65.48387097, "continent": "Asia"}, {"country": "Pakistan", "egg_price": 1.4, "min_wage": 129.9, "affordable": 92.78571429, "continent": "Asia"}];
-const colors={Europe:"#1f77b4",Asia:"#ff7f0e",Africa:"#2ca02c","North America":"#d62728","South America":"#9467bd",Oceania:"#8c564b"};
+const data=[{"country": "Switzerland", "egg_price": 8.12, "min_wage": 4675, "affordable": 575.7389163, "continent": "Europe"}, {"country": "Norway", "egg_price": 7.18, "min_wage": 1869, "affordable": 260.3064067, "continent": "Other"}, {"country": "Australia", "egg_price": 7.18, "min_wage": 2691, "affordable": 374.7910864, "continent": "Oceania"}, {"country": "New Zealand", "egg_price": 7.06, "min_wage": 2316, "affordable": 328.0453258, "continent": "Other"}, {"country": "Uruguay", "egg_price": 6.25, "min_wage": 605, "affordable": 96.8, "continent": "Other"}, {"country": "Czechia", "egg_price": 5.17, "min_wage": 1094.9, "affordable": 211.7794971, "continent": "Other"}, {"country": "Sweden", "egg_price": 5.04, "min_wage": 2439, "affordable": 483.9285714, "continent": "Other"}, {"country": "Belgium", "egg_price": 5.02, "min_wage": 2502.6, "affordable": 498.5258964, "continent": "Other"}, {"country": "Denmark", "egg_price": 4.91, "min_wage": 2250, "affordable": 458.2484725, "continent": "Other"}, {"country": "Austria", "egg_price": 4.9, "min_wage": 1651, "affordable": 336.9387755, "continent": "Other"}, {"country": "UK", "egg_price": 4.87, "min_wage": 2849, "affordable": 585.0102669, "continent": "Europe"}, {"country": "Ireland", "egg_price": 4.78, "min_wage": 2879.5, "affordable": 602.4058577, "continent": "Europe"}, {"country": "Hong Kong", "egg_price": 4.71, "min_wage": 530, "affordable": 112.5265393, "continent": "Other"}, {"country": "Italy", "egg_price": 4.65, "min_wage": 1470, "affordable": 316.1290323, "continent": "Other"}, {"country": "Germany", "egg_price": 4.62, "min_wage": 2829.4, "affordable": 612.4242424, "continent": "Europe"}, {"country": "USA", "egg_price": 4.62, "min_wage": 1256.2, "affordable": 271.9047619, "continent": "Other"}, {"country": "Greece", "egg_price": 4.57, "min_wage": 1216.9, "affordable": 266.2800875, "continent": "Other"}, {"country": "Israel", "egg_price": 4.47, "min_wage": 1680.2, "affordable": 375.8836689, "continent": "Other"}, {"country": "Ghana", "egg_price": 4.46, "min_wage": 32, "affordable": 7.174887892, "continent": "Africa"}, {"country": "France", "egg_price": 4.27, "min_wage": 2160.1, "affordable": 505.8782201, "continent": "Other"}, {"country": "Slovakia", "egg_price": 4.2, "min_wage": 1084.2, "affordable": 258.1428571, "continent": "Other"}, {"country": "Lithuania", "egg_price": 4.2, "min_wage": 1366.2, "affordable": 325.2857143, "continent": "Other"}, {"country": "Latvia", "egg_price": 4.06, "min_wage": 924.3, "affordable": 227.6600985, "continent": "Other"}, {"country": "Romania", "egg_price": 4.04, "min_wage": 942, "affordable": 233.1683168, "continent": "Other"}, {"country": "Poland", "egg_price": 3.96, "min_wage": 1349.6, "affordable": 340.8080808, "continent": "Other"}, {"country": "Chile", "egg_price": 3.96, "min_wage": 555.5, "affordable": 140.2777778, "continent": "Other"}, {"country": "Finland", "egg_price": 3.82, "min_wage": 1613, "affordable": 422.2513089, "continent": "Other"}, {"country": "Spain", "egg_price": 3.8, "min_wage": 1636.4, "affordable": 430.6315789, "continent": "Other"}, {"country": "Hungary", "egg_price": 3.8, "min_wage": 993, "affordable": 261.3157895, "continent": "Other"}, {"country": "Portugal", "egg_price": 3.61, "min_wage": 1271.4, "affordable": 352.1883657, "continent": "Other"}, {"country": "Puerto Rico", "egg_price": 3.58, "min_wage": 1680, "affordable": 469.273743, "continent": "Other"}, {"country": "Morocco", "egg_price": 3.51, "min_wage": 332.5, "affordable": 94.72934473, "continent": "Other"}, {"country": "Netherlands", "egg_price": 3.45, "min_wage": 2249, "affordable": 651.884058, "continent": "Other"}, {"country": "Croatia", "egg_price": 3.44, "min_wage": 1244.2, "affordable": 361.6860465, "continent": "Other"}, {"country": "South Africa", "egg_price": 3.2, "min_wage": 268.8, "affordable": 84, "continent": "Other"}, {"country": "Mexico", "egg_price": 3.16, "min_wage": 330, "affordable": 104.4303797, "continent": "Other"}, {"country": "South Korea", "egg_price": 3.04, "min_wage": 1182, "affordable": 388.8157895, "continent": "Other"}, {"country": "Japan", "egg_price": 2.96, "min_wage": 1244.7, "affordable": 420.5067568, "continent": "Other"}, {"country": "Slovenia", "egg_price": 2.93, "min_wage": 1514.3, "affordable": 516.8259386, "continent": "Other"}, {"country": "Canada", "egg_price": 2.89, "min_wage": 2191.6, "affordable": 758.3391003, "continent": "Other"}, {"country": "Colombia", "egg_price": 2.73, "min_wage": 384.4, "affordable": 140.8058608, "continent": "Other"}, {"country": "UA Emirates", "egg_price": 2.72, "min_wage": 1634, "affordable": 600.7352941, "continent": "Other"}, {"country": "Ivory Coast", "egg_price": 2.71, "min_wage": 124.2, "affordable": 45.8302583, "continent": "Other"}, {"country": "Singapore", "egg_price": 2.68, "min_wage": 1415, "affordable": 527.9850746, "continent": "Other"}, {"country": "Nigeria", "egg_price": 2.66, "min_wage": 45.5, "affordable": 17.10526316, "continent": "Africa"}, {"country": "Malaysia", "egg_price": 2.6, "min_wage": 430.5, "affordable": 165.5769231, "continent": "Other"}, {"country": "Serbia", "egg_price": 2.57, "min_wage": 881.6, "affordable": 343.0350195, "continent": "Other"}, {"country": "Thailand", "egg_price": 2.54, "min_wage": 252.6, "affordable": 99.4488189, "continent": "Other"}, {"country": "Jordan", "egg_price": 2.54, "min_wage": 409, "affordable": 161.023622, "continent": "Other"}, {"country": "Peru", "egg_price": 2.49, "min_wage": 331.8, "affordable": 133.253012, "continent": "Other"}, {"country": "Turkey", "egg_price": 2.47, "min_wage": 759.4, "affordable": 307.4493927, "continent": "Other"}, {"country": "Brazil", "egg_price": 2.42, "min_wage": 303.8, "affordable": 125.5371901, "continent": "Other"}, {"country": "Tanzania", "egg_price": 2.37, "min_wage": 32, "affordable": 13.5021097, "continent": "Africa"}, {"country": "Saudi Arabia", "egg_price": 2.34, "min_wage": 1067, "affordable": 455.982906, "continent": "Other"}, {"country": "Ecuador", "egg_price": 2.33, "min_wage": 482, "affordable": 206.8669528, "continent": "Other"}, {"country": "Cameroon", "egg_price": 2.32, "min_wage": 60.1, "affordable": 25.90517241, "continent": "Other"}, {"country": "China", "egg_price": 2.28, "min_wage": 391.7, "affordable": 171.7982456, "continent": "Other"}, {"country": "Philippines", "egg_price": 2.23, "min_wage": 254.6, "affordable": 114.1704036, "continent": "Other"}, {"country": "Russia", "egg_price": 2.21, "min_wage": 242.5, "affordable": 109.7285068, "continent": "Other"}, {"country": "Kuwait", "egg_price": 2.21, "min_wage": 195.4, "affordable": 88.41628959, "continent": "Other"}, {"country": "Ukraine", "egg_price": 2.1, "min_wage": 202.9, "affordable": 96.61904762, "continent": "Other"}, {"country": "Vietnam", "egg_price": 2.1, "min_wage": 212.4, "affordable": 101.1428571, "continent": "Other"}, {"country": "Paraguay", "egg_price": 2.09, "min_wage": 405.9, "affordable": 194.2105263, "continent": "Other"}, {"country": "Tunisia", "egg_price": 2.01, "min_wage": 149, "affordable": 74.12935323, "continent": "Other"}, {"country": "Dominican Republic", "egg_price": 2.01, "min_wage": 269.9, "affordable": 134.278607, "continent": "Other"}, {"country": "Costa Rica", "egg_price": 1.94, "min_wage": 726, "affordable": 374.2268041, "continent": "Other"}, {"country": "India", "egg_price": 1.89, "min_wage": 43.2, "affordable": 22.85714286, "continent": "Asia"}, {"country": "Kenya", "egg_price": 1.89, "min_wage": 116.9, "affordable": 61.85185185, "continent": "Other"}, {"country": "Guatemala", "egg_price": 1.89, "min_wage": 513.1, "affordable": 271.4814815, "continent": "Other"}, {"country": "Uganda", "egg_price": 1.83, "min_wage": 35.1, "affordable": 19.18032787, "continent": "Africa"}, {"country": "Bolivia", "egg_price": 1.81, "min_wage": 469, "affordable": 259.1160221, "continent": "Other"}, {"country": "Kazakhstan", "egg_price": 1.8, "min_wage": 161.5, "affordable": 89.72222222, "continent": "Other"}, {"country": "Azerbaijan", "egg_price": 1.8, "min_wage": 235.3, "affordable": 130.7222222, "continent": "Other"}, {"country": "Indonesia", "egg_price": 1.79, "min_wage": 343.8, "affordable": 192.0670391, "continent": "Asia"}, {"country": "Zambia", "egg_price": 1.77, "min_wage": 52.8, "affordable": 29.83050847, "continent": "Other"}, {"country": "Sri Lanka", "egg_price": 1.69, "min_wage": 56.5, "affordable": 33.43195266, "continent": "Other"}, {"country": "Egypt", "egg_price": 1.57, "min_wage": 146.7, "affordable": 93.43949045, "continent": "Other"}, {"country": "Bangladesh", "egg_price": 1.55, "min_wage": 101.5, "affordable": 65.48387097, "continent": "Other"}, {"country": "Pakistan", "egg_price": 1.4, "min_wage": 129.9, "affordable": 92.78571429, "continent": "Other"}];
+const colors={Europe:'#56B4E9',Asia:'#F06292',Africa:'#FFD166','North America':'#4CAF50','South America':'#9C6ADE',Oceania:'#CE93D8',Other:'#888'};
 
-function subset(sortKey){
- let d=[...allData].sort((a,b)=>b[sortKey]-a[sortKey]);
+function build(metric){
+ let d=[...data].sort((a,b)=>b[metric]-a[metric]);
  let top=d.slice(0,5);
  let bottom=d.slice(-5);
- let ids=new Set([...top.map(x=>x.country),...bottom.map(x=>x.country)]);
- let indo=allData.find(x=>x.country==="Indonesia");
- let result=[...top,...bottom.filter(x=>!top.some(t=>t.country===x.country))];
- if(indo && !ids.has("Indonesia")) result.push(indo);
- return result.sort((a,b)=>b[sortKey]-a[sortKey]);
-}
+ let out=[...top];
+ bottom.forEach(x=>{if(!out.find(y=>y.country===x.country)) out.push(x)});
+ let indo=data.find(x=>x.country==='Indonesia');
+ if(indo && !out.find(x=>x.country==='Indonesia')) out.splice(5,0,indo);
 
-function draw(sortKey){
- let d=subset(sortKey);
- Plotly.newPlot('chart',[
- {
-   x:d.map(r=>r.country),
-   y:d.map(r=>r.min_wage),
+ let labels=out.map(r=>r.country);
+ let values=out.map(r=>r[metric]);
+ let cols=out.map(r=>colors[r.continent]||'#888');
+
+ Plotly.newPlot('chart',[{
    type:'bar',
-   marker:{color:d.map(r=>colors[r.continent]||'#999')},
-   name:'Minimum wage',
-   customdata:d.map(r=>[r.continent,r.egg_price,r.affordable]),
-   hovertemplate:'<b>%{x}</b><br>Continent:%{customdata[0]}<br>Minimum wage:$%{y}<br>Egg price:$%{customdata[1]}<br>Buying power:%{customdata[2]} dozen/month<extra></extra>'
+   orientation:'h',
+   y:labels.reverse(),
+   x:values.reverse(),
+   marker:{color:cols.reverse()},
+   customdata:out.reverse().map(r=>[r.min_wage,r.egg_price,r.affordable]),
+   hovertemplate:'<b>%{y}</b><br>Minimum wage: $%{customdata[0]}<br>Egg price: $%{customdata[1]}<br>Buying power: %{customdata[2]} dozen/month<extra></extra>'
+ }],{
+   paper_bgcolor:'#0b0914',
+   plot_bgcolor:'#0b0914',
+   font:{color:'#eee'},
+   margin:{l:140,r:40,t:20,b:40},
+   xaxis:{gridcolor:'#222'},
+   yaxis:{gridcolor:'#222'}
  },
- {
-   x:d.map(r=>r.country),
-   y:d.map(r=>r.egg_price),
-   yaxis:'y2',
-   mode:'markers+text',
-   text:d.map(r=>r.country==="Indonesia"?"Indonesia":""),
-   textposition:'top center',
-   marker:{size:10,color:'black'},
-   name:'Egg price'
- }
- ],{
-   xaxis:{tickangle:-20},
-   yaxis:{title:'Minimum wage (USD/month)'},
-   yaxis2:{title:'Egg price (USD/dozen)',overlaying:'y',side:'right'},
-   margin:{t:20,b:80},
-   legend:{orientation:'h'}
- },{responsive:true});
+ {responsive:true});
 }
-
-draw('min_wage');
-document.getElementById('sort').addEventListener('change',e=>draw(e.target.value));
-</script>
-</body></html>
+build('min_wage');
+document.getElementById('sort').onchange=e=>build(e.target.value);
+</script></body></html>
